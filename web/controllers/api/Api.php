@@ -133,7 +133,7 @@ class Api extends REST_Controller {
         $this->form_validation->set_rules('fecha_vigencia','fecha_vigencia','required|trim');
         $this->form_validation->set_rules('token','token','trim|required|callback_valid_token');
         if ($this->form_validation->run('form') == TRUE){
-            $polizas = $this->Mpoliza->select_default("poliza","*",["tipo_poliza" => $_POST["tipo_poliza"], "fecha_vigencia <= '".$_POST["fecha_vigencia"]."'" => null]);
+            $polizas = $this->Mpoliza->select_default("poliza","*",["status" => "0","tipo_poliza" => $_POST["tipo_poliza"], "fecha_vigencia <= '".$_POST["fecha_vigencia"]."'" => null]);
             return $polizas;
         }else{
             $response['mensaje'] = validation_errors();
